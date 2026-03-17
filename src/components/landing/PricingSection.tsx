@@ -9,6 +9,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const APP_URL = "https://app.signaldesk.us";
+
 interface PlanFeature {
   text: string;
   included: boolean;
@@ -134,9 +136,11 @@ const faqs = [
 ];
 
 const PricingCard = ({ plan, isAnnual, index }: { plan: Plan; isAnnual: boolean; index: number }) => {
+  const planSlug = plan.name.toLowerCase().replace(/\s+/g, "_").replace(/[()]/g, "");
+  const signupUrl = `${APP_URL}/auth?tab=signup&plan=${planSlug}`;
+
   const renderPrice = () => {
     if (isAnnual) {
-      // Annual pricing display
       if (plan.name === "Free (forever)") {
         return (
           <>
@@ -167,7 +171,6 @@ const PricingCard = ({ plan, isAnnual, index }: { plan: Plan; isAnnual: boolean;
         );
       }
     } else {
-      // Monthly pricing display
       return (
         <>
           <span className="text-4xl font-bold text-foreground">
@@ -236,8 +239,11 @@ const PricingCard = ({ plan, isAnnual, index }: { plan: Plan; isAnnual: boolean;
         variant={plan.variant}
         size="lg"
         className="w-full"
+        asChild
       >
-        {plan.cta}
+        <a href={signupUrl} target="_blank" rel="noopener noreferrer">
+          {plan.cta}
+        </a>
       </Button>
     </div>
   );
@@ -256,10 +262,9 @@ export const PricingSection = () => {
           <p className="text-lg text-muted-foreground mb-8">
             Start free, scale as you grow
           </p>
-          
-          {/* Billing Toggle */}
+
           <div className="flex items-center justify-center gap-4">
-            <span className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+            <span className={`text-sm font-medium ${!isAnnual ? "text-foreground" : "text-muted-foreground"}`}>
               Monthly
             </span>
             <Switch
@@ -267,7 +272,7 @@ export const PricingSection = () => {
               onCheckedChange={setIsAnnual}
               className="data-[state=checked]:bg-accent"
             />
-            <span className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+            <span className={`text-sm font-medium ${isAnnual ? "text-foreground" : "text-muted-foreground"}`}>
               Annual
             </span>
             {isAnnual && (
@@ -278,21 +283,18 @@ export const PricingSection = () => {
           </div>
         </div>
 
-        {/* Pricing cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16">
           {plans.map((plan, index) => (
             <PricingCard key={index} plan={plan} isAnnual={isAnnual} index={index} />
           ))}
         </div>
 
-        {/* Trust Statements */}
         <div className="text-center my-12 max-w-3xl mx-auto space-y-2">
           <p className="text-muted-foreground">No contracts. Cancel anytime.</p>
           <p className="text-muted-foreground">Upgrade or downgrade as your work changes.</p>
           <p className="text-muted-foreground">Your FlowDesks stay intact across plans.</p>
         </div>
 
-        {/* FAQ */}
         <div className="max-w-3xl mx-auto">
           <h3 className="text-2xl font-bold text-foreground text-center mb-8">
             Frequently Asked Questions

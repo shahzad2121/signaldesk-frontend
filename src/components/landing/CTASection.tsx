@@ -8,7 +8,10 @@ export const CTASection = forwardRef<HTMLElement>((_, ref) => {
   };
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-gradient-cta relative overflow-hidden">
+    <section
+      ref={ref}
+      className="py-16 lg:py-24 bg-gradient-cta relative overflow-hidden"
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
@@ -26,13 +29,18 @@ export const CTASection = forwardRef<HTMLElement>((_, ref) => {
 
           <Button
             size="xl"
-            onClick={scrollToPricing}
             className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-xl hover:shadow-2xl group"
+            asChild
           >
-            Start Your Free Account
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <a
+              href="https://app.signaldesk.us/auth?tab=signup"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Start Your Free Account
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
           </Button>
-
           <p className="mt-6 text-primary-foreground/60 text-sm">
             No credit card required • Free forever plan available
           </p>

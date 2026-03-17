@@ -21,7 +21,7 @@ export const HeroSection = () => {
       <section className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
-        
+
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left content */}
@@ -38,14 +38,15 @@ export const HeroSection = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
-                <Button
-                  variant="hero"
-                  size="xl"
-                  onClick={scrollToPricing}
-                  className="group"
-                >
-                  Get Started Free
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <Button variant="hero" size="xl" className="group" asChild>
+                  <a
+                    href="https://app.signaldesk.us/auth?tab=signup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get Started Free
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
                 </Button>
                 <Button
                   variant="outline"
@@ -64,16 +65,20 @@ export const HeroSection = () => {
                   Trusted by 500+ teams worldwide
                 </p>
                 <div className="flex flex-wrap gap-6 justify-center lg:justify-start items-center opacity-60">
-                  {["TechCorp", "StartupHQ", "DesignLab", "CloudBase", "DataFlow"].map(
-                    (company) => (
-                      <div
-                        key={company}
-                        className="text-sm font-semibold text-muted-foreground"
-                      >
-                        {company}
-                      </div>
-                    )
-                  )}
+                  {[
+                    "TechCorp",
+                    "StartupHQ",
+                    "DesignLab",
+                    "CloudBase",
+                    "DataFlow",
+                  ].map((company) => (
+                    <div
+                      key={company}
+                      className="text-sm font-semibold text-muted-foreground"
+                    >
+                      {company}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -81,7 +86,7 @@ export const HeroSection = () => {
             {/* Right content - Hero image */}
             <div className="relative animate-fade-in animation-delay-200">
               <div className="relative z-10">
-              <img
+                <img
                   src={heroDashboard}
                   alt="SignalDesk workspace dashboard showing project tabs, categories, and organized link cards"
                   className="w-full rounded-2xl shadow-2xl animate-float hue-rotate-[180deg] saturate-150 brightness-105"
